@@ -8,7 +8,11 @@
       <p>所以还是很有必要早点掌握的。（信我，你看完肯定就懂了）</p>
     </div>
     <!-- 置顶 -->
-    <div class="to-top" @click="toTop">回到顶部</div>
+    <div
+      v-show="controlTop"
+      class="to-top"
+      @click="toTop"
+    >回到顶部</div>
   </div>
 </template>
 
@@ -19,7 +23,14 @@ export default {
   mounted () {
     window.onscroll = function () {
       const scrollTop = document.body.scrollTop || document.documentElement.scrollTop
-      console.log('滚动条位置：' + scrollTop)
+      if (scrollTop > 2000) {
+        this.controlTop = true
+      }
+    }
+  },
+  data () {
+    return {
+      controlTop: false
     }
   },
   methods: {
